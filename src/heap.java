@@ -1,3 +1,5 @@
+package com.company;
+
 import java.util.ArrayList;
 import java.util.Comparator;
 
@@ -32,6 +34,7 @@ public class heap<T> {
     }
 
     public void removeTop() {
+        System.out.println("removeTop");
         if (!arr.isEmpty()) {
 
             arr.set(0, arr.get(arr.size() - 1));
@@ -40,9 +43,9 @@ public class heap<T> {
             int n = 1;
             while (true) {
                 // if has both left and right node
-                if (2 * n + 1 < arr.size()) {
+                if (2 * n + 1 <=arr.size()) {
                     // current bigger than left or right
-                    if (comparator.compare(arr.get(n), arr.get(2 * n - 1)) > 0 || comparator.compare(arr.get(n), arr.get(2 * n)) > 0) {
+                    if (comparator.compare(arr.get(n-1), arr.get(2 * n - 1)) > 0 || comparator.compare(arr.get(n-1), arr.get(2 * n)) > 0) {
                         if (comparator.compare(arr.get(2 * n - 1), arr.get(2 * n)) > 0) {
                             // left bigger than right node, swap current and right
                             swap(2 * n, n - 1);
@@ -57,7 +60,7 @@ public class heap<T> {
                     }
                 }
                 // if only has left node
-                else if (2 * n < arr.size()) {
+                else if (2 * n <=arr.size()) {
                     if (comparator.compare(arr.get(n - 1), arr.get(2 * n - 1)) > 0) {
                         // current bigger than left go to left
                         swap(2 * n - 1, n - 1);
@@ -70,6 +73,7 @@ public class heap<T> {
                 }
             }
 
+            System.out.println(checkSelfIntegrity());
         } else {
             throw new IndexOutOfBoundsException();
         }
@@ -82,7 +86,6 @@ public class heap<T> {
             arr.set(a, arr.get(b));
             arr.set(b, temp);
             System.out.println(this);
-
         } else {
             throw new IndexOutOfBoundsException();
         }
@@ -110,8 +113,11 @@ public class heap<T> {
                 n++;
             } else {
                 sb.append(arr.get(i) + " ");
+
             }
+
         }
+
         return sb.toString();
     }
 
